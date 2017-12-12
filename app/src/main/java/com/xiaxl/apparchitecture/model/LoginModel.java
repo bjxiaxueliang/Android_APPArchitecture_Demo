@@ -15,20 +15,20 @@ import bolts.Task;
  * @author xiaxueliang
  *         登录Model管理类
  */
-public class LoginDataManager extends Observable {
+public class LoginModel extends Observable {
 
 
-    private static final String TAG = LoginDataManager.class.getSimpleName();
+    private static final String TAG = LoginModel.class.getSimpleName();
 
     /**
      * ------单例相关begin-----
      */
-    private static final LoginDataManager single = new LoginDataManager();
+    private static final LoginModel single = new LoginModel();
 
-    private LoginDataManager() {
+    private LoginModel() {
     }
 
-    public static LoginDataManager getInstance() {
+    public static LoginModel getInstance() {
         return single;
     }
 
@@ -95,7 +95,7 @@ public class LoginDataManager extends Observable {
                 // TODO 缓存数据
                 cacheLoginData(context, result);
                 // TODO 通知登录状态的观察者 登录成功
-                notifyUserDataObservers(LoginCallBackModel.LOGIN_SUCCESS, "123456", result);
+                notifyUserDataObservers(LoginCallBack.LOGIN_SUCCESS, "123456", result);
 
                 return null;
             }
@@ -138,7 +138,7 @@ public class LoginDataManager extends Observable {
         values[0] = value;
         values[1] = value1;
         //
-        notifyObservers(new LoginCallBackModel(type, key, values));
+        notifyObservers(new LoginCallBack(type, key, values));
 
     }
 
@@ -160,7 +160,7 @@ public class LoginDataManager extends Observable {
         Object[] values = new Object[1];
         values[0] = value;
         //
-        notifyObservers(new LoginCallBackModel(type, key, values));
+        notifyObservers(new LoginCallBack(type, key, values));
 
     }
 

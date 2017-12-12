@@ -3,10 +3,10 @@ package com.xiaxl.apparchitecture.model;
 /**
  *
  */
-public class LoginCallBackModel {
+public class LoginCallBack {
 
 
-    private static final String TAG = LoginCallBackModel.class.getSimpleName();
+    private static final String TAG = "LoginCallBack";
 
     // 登录成功
     public static final int LOGIN_SUCCESS = 0;
@@ -20,7 +20,7 @@ public class LoginCallBackModel {
     public Object key = null;
     public Object[] value = null;
 
-    public LoginCallBackModel(int valueType, Object key, Object... value) {
+    public LoginCallBack(int valueType, Object key, Object... value) {
         this.valueType = valueType;
         this.key = key;
         this.value = value;

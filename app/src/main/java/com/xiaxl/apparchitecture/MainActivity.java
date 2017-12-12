@@ -5,11 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.xiaxl.apparchitecture.data.UserLoginData;
-import com.xiaxl.apparchitecture.model.LoginCallBackModel;
-import com.xiaxl.apparchitecture.model.LoginDataManager;
+import com.xiaxl.apparchitecture.model.LoginCallBack;
+import com.xiaxl.apparchitecture.model.LoginModel;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_main);
 
         // TODO 注册观察者
-        LoginDataManager.getInstance().addObserver(this);
+        LoginModel.getInstance().addObserver(this);
 
         // 初始化UI
         intiUI();
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
 
         // TODO 取消观察者注册
-        LoginDataManager.getInstance().deleteObserver(this);
+        LoginModel.getInstance().deleteObserver(this);
     }
 
     /**
@@ -53,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
             return;
         }
 
-        if (data instanceof LoginCallBackModel) {
-            LoginCallBackModel callbackData = (LoginCallBackModel) data;
+        if (data instanceof LoginCallBack) {
+            LoginCallBack callbackData = (LoginCallBack) data;
             //
             int valueType = callbackData.valueType;
             Object key = callbackData.key;
@@ -62,15 +61,15 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             switch (valueType) {
                 // TODO 登录成功的回调
-                case LoginCallBackModel.LOGIN_SUCCESS:
+                case LoginCallBack.LOGIN_SUCCESS:
                     //
                     updateUI((UserLoginData) value);
                     return;
                 // TODO 退出登录
-                case LoginCallBackModel.LOGIN_EXIT:
+                case LoginCallBack.LOGIN_EXIT:
                     return;
                 // TODO 登录用户数据变化
-                case LoginCallBackModel.LOGIN_USER_CHANGE:
+                case LoginCallBack.LOGIN_USER_CHANGE:
                     return;
             }
 
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
             public void onClick(View v) {
 
                 // TODO 取网络数据
-                LoginDataManager.getInstance().getLoginDataFromNet(MainActivity.this, "111", "222", "333", "666");
+                LoginModel.getInstance().getLoginDataFromNet(MainActivity.this, "111", "222", "333", "666");
             }
         });
     }
