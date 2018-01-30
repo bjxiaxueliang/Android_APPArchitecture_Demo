@@ -5,6 +5,7 @@ import android.content.Context;
 import com.xiaxl.apparchitecture.data.UserLoginData;
 import com.xiaxl.apparchitecture.data.UserVoData;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.Callable;
 
@@ -15,34 +16,29 @@ import bolts.Task;
  * @author xiaxueliang
  *         登录Model管理类
  */
-public class LoginModel extends Observable {
+public class LoginModel {
 
 
     private static final String TAG = LoginModel.class.getSimpleName();
 
-    /**
-     * ------单例相关begin-----
-     */
-    private static final LoginModel single = new LoginModel();
 
-    private LoginModel() {
+    private LoginModelListener mLoginModelListener;
+
+    public LoginModel(LoginModelListener listener) {
+        this.mLoginModelListener = listener;
     }
 
-    public static LoginModel getInstance() {
-        return single;
-    }
 
+    public void onDestroy() {
+        if (mLoginModelListener != null) {
+            mLoginModelListener = null;
+        }
+    }
 
     /**
      * 获取网络的用户信息
-     *
-     * @param context
-     * @param phone
-     * @param password
-     * @param validCode
-     * @param timestamp
      */
-    public void getLoginDataFromNet(final Context context, final String phone, final String password, final String validCode, final String timestamp) {
+    public void getLoginDataFromNet() {
 
         /**
          * TODO 模拟获取用户的网络数据
@@ -93,10 +89,11 @@ public class LoginModel extends Observable {
                 UserLoginData result = task.getResult();
 
                 // TODO 缓存数据
-                cacheLoginData(context, result);
+                cacheLoginData(result);
                 // TODO 通知登录状态的观察者 登录成功
-                notifyUserDataObservers(LoginCallBack.LOGIN_SUCCESS, "123456", result);
-
+                if (mLoginModelListener != null) {
+                    mLoginModelListener.onLoginModelSu(result);
+                }
                 return null;
             }
         }, Task.UI_THREAD_EXECUTOR);
@@ -108,61 +105,23 @@ public class LoginModel extends Observable {
     /**
      * 缓存登录数据
      *
-     * @param context
      * @param data
      */
-    private void cacheLoginData(Context context, UserLoginData data) {
+    private void cacheLoginData(UserLoginData data) {
         // TODO 缓存数据
 
     }
 
-    //##################################通知UI变化######################################
 
-    /**
-     * * 通知全部观察者，channel数据发生了变化
-     *
-     * @param type   操作类型，如 登录成功，退出登录 等等
-     * @param key    回调的Value相同时，可以用key区分
-     * @param value  回调的Value数据
-     * @param value1
-     */
-    private void notifyUserDataObservers(int type, Object key, Object value, Object value1) {
-        //
+    //##################################回调接口######################################
 
-        /**
-         * 通知观察者，数据发生了变化
-         */
-        setChanged();
-        //
-        Object[] values = new Object[2];
-        values[0] = value;
-        values[1] = value1;
-        //
-        notifyObservers(new LoginCallBack(type, key, values));
+
+    public interface LoginModelListener {
+
+        void onLoginModelSu(UserLoginData data);
+
+        void onLoginModelErr();
 
     }
-
-
-    /**
-     * 通知全部观察者，channel数据发生了变化
-     *
-     * @param type  操作类型，如 登录成功，退出登录 等等
-     * @param key   回调的Value相同时，可以用key区分
-     * @param value 回调的Value数据
-     */
-    public void notifyUserDataObservers(int type, Object key, Object value) {
-
-        /**
-         * 通知观察者，数据发生了变化
-         */
-        setChanged();
-        //
-        Object[] values = new Object[1];
-        values[0] = value;
-        //
-        notifyObservers(new LoginCallBack(type, key, values));
-
-    }
-
 
 }
