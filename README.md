@@ -12,7 +12,7 @@
 我们知道 **代码越简单、易读，越不易出bug**，但APP功能越来越复杂，代码量越来越多，好像随之代码也会越来越复杂。
 
 ### 一、那我们能不能设计一个，`只做数据展示，不做用户交互`的APP架构呢？
-![这里写图片描述](http://img.blog.csdn.net/20170521091447663?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlheGw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![enter image description here](https://github.com/xiaxveliang/Android_APPArchitecture_Demo/blob/master/image/00001.png)
  
 上边的截图，是关于 **只做数据展示，不做用户交互**的APP架构思考。
 
@@ -34,7 +34,8 @@
 
 以上的框架图是可以满足一般的Android APP业务需求的。但如果客户端功能越来越复杂，可`按业务分为不同的功能模块`，模块内部使用以上介绍的框架和通信方式。
 `模块内部，采用观察者回调进行通信；模块之间采用广播(或者其他进程间通信方式)进行通信`：
-![这里写图片描述](http://img.blog.csdn.net/20170521091529180?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlheGw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![enter image description here](https://github.com/xiaxveliang/Android_APPArchitecture_Demo/blob/master/image/00002.png)
+ 
  
 这里以广播举例：
 + 1、主模块内部采用事件回调进行通信
@@ -44,18 +45,22 @@
 ### 五、与MVP MVC的比较
 
 #### 在`无用户UI操作`介入时`小架构`MVC之间的关系如下
-![这里写图片描述](http://img.blog.csdn.net/20170524155554688?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlheGw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![enter image description here](https://github.com/xiaxveliang/Android_APPArchitecture_Demo/blob/master/image/00003.png)
+ 
 正好与MVP的不谋而合，MVP三者的关系如下：
 
-![enter image description here](http://img.blog.csdn.net/20170520083318991?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlheGw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![enter image description here](https://github.com/xiaxveliang/Android_APPArchitecture_Demo/blob/master/image/00004.png)
+
 
 关于MVP的文章，可参考[Android MVC MVP MVVM](http://blog.csdn.net/xiaxl/article/details/72593871)
 
 #### 在`用户UI操作`介入后`小架构`MVC之间的关系如下
-![这里写图片描述](http://img.blog.csdn.net/20170524155708299?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlheGw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![enter image description here](https://github.com/xiaxveliang/Android_APPArchitecture_Demo/blob/master/image/00005.png)
+
 
 传统的MVC模型如下：
-![enter image description here](http://img.blog.csdn.net/20170520083218154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveGlheGw=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![enter image description here](https://github.com/xiaxveliang/Android_APPArchitecture_Demo/blob/master/image/00006.png)
+
 
 关于MVC的文章，可参考[Android MVC MVP MVVM](http://blog.csdn.net/xiaxl/article/details/72593871)
 
