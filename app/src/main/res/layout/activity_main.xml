@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.xiaxl.apparchitecture.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
 
-    <Button
-        android:id="@+id/button"
+        <variable
+            name="viewmodel"
+            type="com.xiaxl.apparchitecture.vm.UserViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="点我登录" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textview01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewmodel.userName}" />
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewmodel.getRemoteUserData()}"
+            android:text="点我登录" />
+    </LinearLayout>
+</layout>
+
+
