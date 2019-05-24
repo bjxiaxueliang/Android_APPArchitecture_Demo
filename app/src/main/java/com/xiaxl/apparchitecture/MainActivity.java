@@ -16,7 +16,7 @@ import java.util.Observer;
 public class MainActivity extends AppCompatActivity implements Observer {
 
 
-    boolean DEBUG = true;
+    boolean DEBUG = false;
 
 
     //
