@@ -15,9 +15,8 @@ import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity implements Observer {
 
-
+    //
     boolean DEBUG = false;
-
 
     //
     private Button mBtn;
